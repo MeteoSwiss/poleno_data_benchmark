@@ -1,0 +1,2 @@
+g++ -std=c++17 -O3 load_zip.cpp  -o bench_zip    -I    $(pkg-config --cflags opencv4)      -lzip     $(pkg-config --libs opencv4) 
+g++ -O3 load_nc4.cpp -o bench_nc4 $(pkg-config --cflags --libs opencv4 netcdf)
