@@ -35,6 +35,8 @@ int main(int argc, char* argv[]) {
     int count = 0;
 
     for (zip_int64_t i = 0; i < num_entries; ++i) {
+        // Start timing the extraction AND decoding
+        auto start = std::chrono::high_resolution_clock::now();
         const char* name = zip_get_name(archive, i, 0);
         if (std::string(name).find(".png") == std::string::npos) continue;
 
@@ -44,8 +46,7 @@ int main(int argc, char* argv[]) {
         zip_file* file = zip_fopen_index(archive, i, 0);
         if (!file) continue;
 
-        // Start timing the extraction AND decoding
-        auto start = std::chrono::high_resolution_clock::now();
+        
 
         // Read into pre-allocated buffer
         zip_fread(file, buffer.data(), st.size);
